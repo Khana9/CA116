@@ -2,35 +2,31 @@
 
 import sys
 
-amount = 20
+n = 20
 
-line = sys.stdin.readlines()
-plot = {}
-
-i = 0
-while i < len(line):
-   tok = line[i].split()
-   key = tok[0] + "-" + tok[1]
-   plot[key] = True
-   i = i + 1
-
-print(" " + "-" * amount)
+lines = sys.stdin.readlines()
+plot = []
 
 i = 0
-while i < amount:
-   y = amount - i - 1
-   out = []
-
-   x = 0
-   while x < amount:
-      key = str(x) + "-" + str(y)
-      if key in plot:
-         out.append("*")
-      else:
-         out.append(" ")
-      x = x + 1
-
-   print("|" + "".join(out) + "|")
+while i < n:
+   plot.append([" "] * n)
    i = i + 1
 
-print(" " + "-" * amount)
+i = 0
+while i < len(lines):
+   tokens = lines[i].split()
+   y = int(tokens[1])
+   x = int(tokens[0])
+   plot[y][x] = "*"
+   i = i + 1
+
+# Print header line.
+print(" " + "-" * n)
+
+y = 0
+while y < n:
+   print("|" + "".join(plot[n - y - 1]) + "|")
+   y = y + 1
+
+# Print footer line.
+print(" " + "-" * n)
